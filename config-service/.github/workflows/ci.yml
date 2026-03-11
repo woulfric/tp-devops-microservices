@@ -1,10 +1,16 @@
-name: Microservices CI
+name: Catalogue Service CI
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'catalogue-service/**'
+      - '.github/workflows/catalogue-service.yml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'catalogue-service/**'
+      - '.github/workflows/catalogue-service.yml'
 
 jobs:
   build:
@@ -21,7 +27,7 @@ jobs:
           java-version: 21
           cache: maven
 
-      - name: Build config-service
+      - name: Build catalogue-service
         run: |
-          cd config-service
+          cd catalogue-service
           mvn clean install -DskipTests
