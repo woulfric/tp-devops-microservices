@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commande-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: commande-service
+  template:
+    metadata:
+      labels:
+        app: commande-service
+    spec:
+      containers:
+        - name: commande-service
+          image: commande-service:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8083
+          volumeMounts:
+            - mountPath: /data
+              name: commande-storage
+      volumes:
+        - name: commande-storage
+          persistentVolumeClaim:
+            claimName: commande-pvc
